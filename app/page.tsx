@@ -6,7 +6,7 @@ export const revalidate = 0;
 
 // Using route handler
 const getNotices = async (): Promise<NoticeWithUser[]> => {
-  const notices = await fetch('http://localhost:3000/api/notices');
+  const notices = await fetch(`${process.env.DOMAIN}/api/notices`);
   return notices.json();
 };
 
@@ -16,7 +16,7 @@ export default async function HomePage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center p-8">
       <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-4xl">
-        Next Chapter Notice Board
+        Notice Board
       </h1>
       {notices?.length > 0 ? (
         notices.map((notice) => (
