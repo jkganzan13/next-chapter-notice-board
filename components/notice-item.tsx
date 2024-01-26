@@ -1,12 +1,15 @@
 import React from 'react';
 import { NoticeWithUser } from '@/types';
 import { postQuestion } from '@/actions/notices';
+import { getReplies } from '@/actions/replies';
 
 interface NoticeProps {
   notice: NoticeWithUser;
 }
 
 export default async function NoticeItem({ notice }: NoticeProps) {
+  const replies = await getReplies(notice.id);
+
   return (
     <div className="bg-white/60 p-8 pb-6 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex items-center space-x-4 mb-4">
@@ -38,6 +41,19 @@ export default async function NoticeItem({ notice }: NoticeProps) {
           Post
         </button>
       </form>
+
+      {replies.length > 0 && (
+        <div className="pt-4">
+          {replies.map((reply) => (
+            <div
+              key={reply.id}
+              className="bg-white w-full border border-gray-100 p-2 rounded text-sm mb-2 shadow"
+            >
+              <b>Q:</b> {reply.message}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

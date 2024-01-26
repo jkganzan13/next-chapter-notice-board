@@ -1,8 +1,10 @@
+import { Suspense } from 'react';
 import NoticeItem from '@/components/notice-item';
 import { NoticeWithUser } from '@/types';
 
 export const revalidate = 0;
 
+// Using route handler
 const getNotices = async (): Promise<NoticeWithUser[]> => {
   const notices = await fetch('http://localhost:3000/api/notices');
   return notices.json();
@@ -17,7 +19,11 @@ export default async function HomePage() {
         Next Chapter Notice Board
       </h1>
       {notices?.length > 0 ? (
-        notices.map((notice) => <NoticeItem key={notice.id} notice={notice} />)
+        notices.map((notice) => (
+          <Suspense key={notice.id} fallback={<NoticeItem.Skeleton />}>
+            <NoticeItem notice={notice} />
+          </Suspense>
+        ))
       ) : (
         <div className="bg-white/30 p-8 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
           No notices
