@@ -18,7 +18,8 @@ export type NoticeWithUser = Notice & User;
 export type Reply = {
   id: string;
   noticeId: string;
+  message: string;
   parentId?: string;
-  userId?: string;
+  userId?: string | null;
   createdAt: string;
 };

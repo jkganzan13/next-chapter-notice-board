@@ -1,11 +1,12 @@
 import React from 'react';
 import { NoticeWithUser } from '@/types';
+import { postQuestion } from '@/actions/notices';
 
 interface NoticeProps {
   notice: NoticeWithUser;
 }
 
-export default function NoticeItem({ notice }: NoticeProps) {
+export default async function NoticeItem({ notice }: NoticeProps) {
   return (
     <div className="bg-white/60 p-8 pb-6 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
       <div className="flex items-center space-x-4 mb-4">
@@ -23,13 +24,20 @@ export default function NoticeItem({ notice }: NoticeProps) {
         <p className="text-sm">{notice.description}</p>
       </div>
 
-      {/* Textbox */}
-      <div className="w-100 pt-4 mt-2 border-t border-gray-200">
+      <form
+        action={postQuestion}
+        className="w-100 pt-4 mt-2 border-t border-gray-200 flex"
+      >
+        <input type="hidden" name="noticeId" value={notice.id} />
         <input
+          name="message"
           className="w-full rounded-full px-3 py-1 text-sm border border-gray-200 "
           placeholder="Ask a question..."
         />
-      </div>
+        <button className="bg-blue-400 rounded-xl text-sm px-2 py-1 text-white font-semibold ml-2">
+          Post
+        </button>
+      </form>
     </div>
   );
 }
