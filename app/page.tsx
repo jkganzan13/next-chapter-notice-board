@@ -1,8 +1,15 @@
 import NoticeItem from '@/components/notice-item';
-import { Notice } from '@/types';
+import { NoticeWithUser } from '@/types';
+
+export const revalidate = 0;
+
+const getNotices = async (): Promise<NoticeWithUser[]> => {
+  const notices = await fetch('http://localhost:3000/api/notices');
+  return notices.json();
+};
 
 export default async function HomePage() {
-  const notices = [] as Notice[];
+  const notices = await getNotices();
 
   return (
     <main className="relative flex min-h-screen flex-col items-center p-8">

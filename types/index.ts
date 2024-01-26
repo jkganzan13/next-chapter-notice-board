@@ -10,7 +10,10 @@ export type User = {
   id: string;
   name: string;
   createdAt: string;
+  image: string;
 };
+
+export type NoticeWithUser = Notice & User;
 
 export type Reply = {
   id: string;
