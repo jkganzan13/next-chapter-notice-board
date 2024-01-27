@@ -2,6 +2,7 @@ import React from 'react';
 import { NoticeWithUser } from '@/types';
 import { postQuestion } from '@/actions/notices';
 import { getReplies } from '@/actions/replies';
+import InputForm from './input-form';
 
 interface NoticeProps {
   notice: NoticeWithUser;
@@ -27,20 +28,9 @@ export default async function NoticeItem({ notice }: NoticeProps) {
         <p className="text-sm">{notice.description}</p>
       </div>
 
-      <form
-        action={postQuestion}
-        className="w-100 pt-4 mt-2 border-t border-gray-200 flex"
-      >
+      <InputForm formAction={postQuestion}>
         <input type="hidden" name="noticeId" value={notice.id} />
-        <input
-          name="message"
-          className="w-full rounded-full px-3 py-1 text-sm border border-gray-200 "
-          placeholder="Ask a question..."
-        />
-        <button className="bg-blue-400 rounded-xl text-sm px-2 py-1 text-white font-semibold ml-2">
-          Post
-        </button>
-      </form>
+      </InputForm>
 
       {replies.length > 0 && (
         <div className="pt-4">

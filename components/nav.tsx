@@ -10,7 +10,7 @@ export default function Navbar() {
           />
           <span className="font-semibold">Next Chapter</span>
         </div>
-        <button className="bg-blue-400 rounded-md text-sm px-4 py-1 text-white ml-2">
+        <button className="bg-blue-500 rounded-md w-20 text-sm px-2 py-1 text-white font-semibold ml-2">
           Login
         </button>
       </nav>
