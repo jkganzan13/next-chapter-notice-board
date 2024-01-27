@@ -1,6 +1,6 @@
 import React from 'react';
 import { NoticeWithUser } from '@/types';
-import { postQuestion } from '@/actions/notices';
+import { createReply } from '@/actions/replies';
 import { getReplies } from '@/actions/replies';
 import InputForm from './input-form';
 
@@ -30,9 +30,14 @@ export default async function NoticeItem({ notice }: NoticeProps) {
 
       <InputForm
         className="pt-4 mt-2 border-t border-gray-200 "
-        formAction={postQuestion}
+        formAction={createReply}
       >
         <input type="hidden" name="noticeId" value={notice.id} />
+        <input
+          name="message"
+          placeholder="Ask a question..."
+          className="w-full rounded-full px-3 py-1 text-sm border border-gray-200"
+        />
       </InputForm>
 
       {replies.length > 0 && (
