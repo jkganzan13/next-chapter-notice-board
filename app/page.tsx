@@ -1,5 +1,7 @@
 import { Suspense } from 'react';
+import NoticeForm from '@/components/notice-form';
 import NoticeItem from '@/components/notice-item';
+import { getSession } from '@/lib/auth';
 import { NoticeWithUser } from '@/types';
 
 export const revalidate = 0;
@@ -12,12 +14,16 @@ const getNotices = async (): Promise<NoticeWithUser[]> => {
 
 export default async function HomePage() {
   const notices = await getNotices();
+  const session = await getSession();
 
   return (
     <main className="relative flex min-h-screen flex-col items-center p-8">
-      <h1 className="pt-4 pb-8 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-4xl">
-        Notice Board
+      {!!session && <NoticeForm />}
+
+      <h1 className="pt-4 pb-8 mt-4 bg-gradient-to-br from-black via-[#171717] to-[#575757] bg-clip-text text-4xl font-medium tracking-tight text-transparent md:text-4xl">
+        Notices
       </h1>
+
       {notices?.length > 0 ? (
         notices.map((notice) => (
           <Suspense key={notice.id} fallback={<NoticeItem.Skeleton />}>

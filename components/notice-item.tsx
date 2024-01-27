@@ -28,7 +28,10 @@ export default async function NoticeItem({ notice }: NoticeProps) {
         <p className="text-sm">{notice.description}</p>
       </div>
 
-      <InputForm formAction={postQuestion}>
+      <InputForm
+        className="pt-4 mt-2 border-t border-gray-200 "
+        formAction={postQuestion}
+      >
         <input type="hidden" name="noticeId" value={notice.id} />
       </InputForm>
 

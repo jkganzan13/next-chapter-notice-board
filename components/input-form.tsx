@@ -3,12 +3,14 @@
 import React, { PropsWithChildren, createRef } from 'react';
 
 interface InputFormProps {
-  formAction(form: FormData): Promise<void>;
+  className?: string;
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  formAction(form: FormData): Promise<void>;
 }
 
 export default function InputForm({
   children,
+  className,
   inputProps,
   formAction,
 }: PropsWithChildren<InputFormProps>) {
@@ -20,11 +22,7 @@ export default function InputForm({
   };
 
   return (
-    <form
-      ref={ref}
-      action={handleAction}
-      className="w-100 pt-4 mt-2 border-t border-gray-200 flex"
-    >
+    <form ref={ref} action={handleAction} className={`w-100 flex ${className}`}>
       {children}
       <input
         name="message"
