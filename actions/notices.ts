@@ -16,7 +16,7 @@ export async function createNotice(formData: FormData) {
 
   // Validate here
   if (!session?.id) {
-    throw new Error('Only authenticated users can create notice');
+    throw new Error('Unauthorized');
   }
 
   try {

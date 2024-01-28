@@ -52,6 +52,7 @@ export async function replyToQuestion(formData: FormData) {
     throw new Error('Unauthorized');
   }
 
+  // Only the author of a notice can respond to questions about their notice.
   const notice = await getNoticeById(noticeId);
   if (parseInt(notice?.authorId) !== session.id) {
     throw new Error('Unauthorized');
@@ -60,7 +61,6 @@ export async function replyToQuestion(formData: FormData) {
   try {
     await sql`INSERT INTO replies ("noticeId", "parentId", "userId", message) VALUES (${noticeId},${parentId}, ${session.id}, ${message});`;
   } catch (ex) {
-    console.log('====ex', ex);
     throw new Error('Unable to post question');
   }
 
