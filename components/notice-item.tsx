@@ -61,7 +61,7 @@ export default async function NoticeItem({ notice }: NoticeProps) {
 
 NoticeItem.Skeleton = function NoticeItemSkeleton() {
   return (
-    <div className="bg-white/60 p-8 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
+    <div className="bg-white/60 p-8 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full mb-4">
       <div className="flex items-center space-x-4 mb-4">
         <div className="h-12 w-12 rounded-full bg-gray-200 animate-pulse" />
         <div className="space-y-1 flex-1">

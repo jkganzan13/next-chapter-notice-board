@@ -4,8 +4,6 @@ import NoticeItem from '@/components/notice-item';
 import { getSession } from '@/lib/auth';
 import { NoticeWithUser } from '@/types';
 
-export const revalidate = 0;
-
 // Using route handler
 const getNotices = async (): Promise<NoticeWithUser[]> => {
   const notices = await fetch(`${process.env.DOMAIN}/api/notices`, {
