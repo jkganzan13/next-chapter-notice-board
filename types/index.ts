@@ -11,6 +11,7 @@ export type User = {
   name: string;
   createdAt: string;
   image: string;
+  email: string;
 };
 
 export type NoticeWithUser = Notice & User;

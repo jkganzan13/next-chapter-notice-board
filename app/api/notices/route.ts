@@ -5,7 +5,7 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const { rows } =
-      await sql`SELECT notices.*, users.name, users.image FROM notices JOIN users ON "authorId" = users.id;`;
+      await sql`SELECT notices.*, users.email, users.name, users.image FROM notices JOIN users ON "authorId" = users.id;`;
     return NextResponse.json(rows);
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

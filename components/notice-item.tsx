@@ -22,7 +22,7 @@ export default async function NoticeItem({ notice }: NoticeProps) {
         </div>
         <div>
           <div className="w-50 text-base">{notice.name}</div>
-          <div className="w-40 text-xs text-gray-400">Author name</div>
+          <div className="w-40 text-xs text-gray-400">{notice.email}</div>
         </div>
       </div>
 
