@@ -23,3 +23,7 @@ export type Reply = {
   userId?: string | null;
   createdAt: string;
 };
+
+export type Question = Reply & {
+  children: Reply[];
+};

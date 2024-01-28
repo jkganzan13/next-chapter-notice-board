@@ -1,18 +1,21 @@
 import React from 'react';
 import { NoticeWithUser } from '@/types';
 import { createReply } from '@/actions/replies';
-import { getReplies } from '@/actions/replies';
+import { getQuestionsWithReplies } from '@/actions/replies';
+import { getSession } from '@/lib/auth';
 import InputForm from './input-form';
+import Question from './question';
 
 interface NoticeProps {
   notice: NoticeWithUser;
 }
 
 export default async function NoticeItem({ notice }: NoticeProps) {
-  const replies = await getReplies(notice.id);
+  const questions = await getQuestionsWithReplies(notice.id);
+  const user = await getSession();
 
   return (
-    <div className="bg-white/60 p-8 pb-6 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full">
+    <div className="bg-white/60 p-8 pb-6 shadow-xl ring-1 ring-gray-900/5 rounded-lg backdrop-blur-lg max-w-xl mx-auto w-full mb-4">
       <div className="flex items-center space-x-4 mb-4">
         <div className="h-10 w-10 rounded-full">
           <img className="rounded-full" alt={notice.name} src={notice.image} />
@@ -40,15 +43,15 @@ export default async function NoticeItem({ notice }: NoticeProps) {
         />
       </InputForm>
 
-      {replies.length > 0 && (
+      {questions.length > 0 && (
         <div className="pt-4">
-          {replies.map((reply) => (
-            <div
-              key={reply.id}
-              className="bg-white w-full border border-gray-100 p-2 rounded text-sm mb-2 shadow"
-            >
-              <b>Q:</b> {reply.message}
-            </div>
+          {questions.map((question) => (
+            <Question
+              key={question.id}
+              isOwner={user?.id === parseInt(notice?.authorId)}
+              noticeId={notice.id}
+              question={question}
+            />
           ))}
         </div>
       )}

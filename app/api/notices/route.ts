@@ -1,6 +1,7 @@
 import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
+// Example of using route handlers. We should try to use server actions instead.
 export async function GET() {
   try {
     const { rows } =

@@ -8,7 +8,9 @@ export const revalidate = 0;
 
 // Using route handler
 const getNotices = async (): Promise<NoticeWithUser[]> => {
-  const notices = await fetch(`${process.env.DOMAIN}/api/notices`);
+  const notices = await fetch(`${process.env.DOMAIN}/api/notices`, {
+    cache: 'no-store',
+  });
   return notices.json();
 };
 
